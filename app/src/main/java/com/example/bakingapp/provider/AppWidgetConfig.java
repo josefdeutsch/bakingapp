@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.RemoteViews;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.bakingapp.R;
 import com.example.bakingapp.ui.ItemListActivity;
 import com.example.bakingapp.ui.MainActivity;

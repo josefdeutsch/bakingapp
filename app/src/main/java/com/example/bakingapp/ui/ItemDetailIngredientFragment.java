@@ -200,18 +200,18 @@ public class ItemDetailIngredientFragment extends Fragment {
     }
 
     private void supplySharedPreferences() {
-        SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences(SHAREDPREFERENCES_EDITOR, MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = getActivity().getSharedPreferences(SHAREDPREFERENCES_EDITOR, MODE_PRIVATE).edit();
         editor.remove(RECIPE_INDEX);
         editor.putInt(RECIPE_INDEX, mAdapterPosition);
         editor.apply();
     }
 
     private void onUpdateAppWidgetProvider() {
-        Intent intent = new Intent(getApplicationContext(), AppWidgetProvider.class);
+        Intent intent = new Intent(getActivity(), AppWidgetProvider.class);
         intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        int[] ids = AppWidgetManager.getInstance(getApplicationContext()).getAppWidgetIds(new ComponentName(getApplicationContext(), AppWidgetProvider.class));
+        int[] ids = AppWidgetManager.getInstance(getActivity()).getAppWidgetIds(new ComponentName(getActivity(), AppWidgetProvider.class));
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
-        getApplicationContext().sendBroadcast(intent);
+        getActivity().sendBroadcast(intent);
     }
 
 
