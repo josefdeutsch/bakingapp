@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:autoAdvanceViewId="@id/example_widget_stack_view"
+    android:configure="com.example.prototype6.provider.AppWidgetConfig"
+    android:initialLayout="@layout/widget"
+    android:minHeight="600dp"
+    android:minResizeHeight="40dp"
+    android:minWidth="200dp"
+    android:previewImage="@drawable/widget_preview"
+    android:resizeMode="vertical|horizontal"
+    android:updatePeriodMillis="3600000"
+    android:widgetCategory="home_screen"
+    />

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">prototype5</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="mp4">mp4</string>
+    <string name="title_item_ingredient">item_detail_ingredient</string>
+    <string name="title_item_detail_step">item_detail_step</string>
+    <string name="defaultvalue">defaultvalue</string>
+    <string name="question">add item to shoppinglist..?</string>
+    <string name="OK">OK</string>
+    <string name="DISMISS">Dismiss</string>
+    <string name="press">press me..!</string>
+    <string name="question2">please create widget first</string>
+</resources>
