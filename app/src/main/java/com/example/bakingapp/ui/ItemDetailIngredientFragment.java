@@ -37,8 +37,11 @@ import com.example.bakingapp.provider.AppWidgetProvider;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import org.jetbrains.annotations.NotNull;
+
 import java.lang.reflect.Type;
+
 import static android.content.Context.MODE_PRIVATE;
 import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
 import static com.example.bakingapp.constant.Constants.KEY_TASK_OUTPUT;
@@ -168,10 +171,10 @@ public class ItemDetailIngredientFragment extends Fragment {
                 .setCancelable(false)
                 .setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        if(mSharedPreferences.contains(SHOPPINGLIST_TAG)){
+                        if (mSharedPreferences.contains(SHOPPINGLIST_TAG)) {
                             supplySharedPreferences();
                             onUpdateAppWidgetProvider();
-                        }else{
+                        } else {
                             alertDialogfailed();
                         }
                     }

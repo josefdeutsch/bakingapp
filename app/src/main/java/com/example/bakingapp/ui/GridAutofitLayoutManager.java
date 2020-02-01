@@ -10,6 +10,7 @@ public class GridAutofitLayoutManager extends GridLayoutManager {
 
     private int mColumnWidth;
     private boolean mColumnWidthChanged = true;
+
     public GridAutofitLayoutManager(Context context, int columnWidth) {
         super(context, 1);
         setColumnWidth(checkedColumnWidth(context, columnWidth));
@@ -33,6 +34,7 @@ public class GridAutofitLayoutManager extends GridLayoutManager {
             mColumnWidthChanged = true;
         }
     }
+
     @Override
     public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
         if (mColumnWidthChanged && mColumnWidth > 0) {

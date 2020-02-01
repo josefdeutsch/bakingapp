@@ -95,7 +95,7 @@ import static com.example.bakingapp.constant.Constants.STEP_INDEX;
 import static com.example.bakingapp.constant.Constants.WORKREQUEST_STEPFRAGMENT;
 
 
-public class ItemDetailStepFragment extends Fragment implements Player.EventListener{
+public class ItemDetailStepFragment extends Fragment implements Player.EventListener {
 
     public static final String TAG = "ItemDetailStepFragment";
 
@@ -145,7 +145,7 @@ public class ItemDetailStepFragment extends Fragment implements Player.EventList
         EspressoIdlingResource.increment();
         executeWorkmanager();
 
-        if(!mTwoPane){
+        if (!mTwoPane) {
             initFullscreenDialog();
             initFullscreenButton();
         }
@@ -156,10 +156,11 @@ public class ItemDetailStepFragment extends Fragment implements Player.EventList
 
         return rootView;
     }
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
 
-        outState.putInt(NUMBER_AMOUNTOFSTEPS,mAmountOfSteps);
+        outState.putInt(NUMBER_AMOUNTOFSTEPS, mAmountOfSteps);
         outState.putInt(CURRENT_INDEX, mCurrent);
         outState.putInt(STATE_RESUME_WINDOW, mResumeWindow);
         outState.putLong(STATE_RESUME_POSITION, mResumePosition);
@@ -167,6 +168,7 @@ public class ItemDetailStepFragment extends Fragment implements Player.EventList
 
         super.onSaveInstanceState(outState);
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -174,6 +176,7 @@ public class ItemDetailStepFragment extends Fragment implements Player.EventList
             matchesExoPlayerFullScreenConfig();
         }
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -181,6 +184,7 @@ public class ItemDetailStepFragment extends Fragment implements Player.EventList
             withdrawExoPlayer();
         }
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -188,6 +192,7 @@ public class ItemDetailStepFragment extends Fragment implements Player.EventList
             matchesExoPlayerFullScreenConfig();
         }
     }
+
     @Override
     public void onStop() {
         super.onStop();
@@ -195,6 +200,7 @@ public class ItemDetailStepFragment extends Fragment implements Player.EventList
             withdrawExoPlayer();
         }
     }
+
     @Override
     public void onDetach() {
         super.onDetach();
@@ -237,7 +243,7 @@ public class ItemDetailStepFragment extends Fragment implements Player.EventList
     }
 
     private void getRecipeIndex() {
-        if(getArguments().containsKey(RECIPE_INDEX)){
+        if (getArguments().containsKey(RECIPE_INDEX)) {
             mRecipeIndex = getArguments().getInt(RECIPE_INDEX);
         }
     }
@@ -246,15 +252,22 @@ public class ItemDetailStepFragment extends Fragment implements Player.EventList
         Activity activity = this.getActivity();
         CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
         if (appBarLayout != null) {
-            appBarLayout.setTitle(mSharedPreferences.getString(RECIPE_NAME,getString(R.string.defaultvalue)));
+            appBarLayout.setTitle(mSharedPreferences.getString(RECIPE_NAME, getString(R.string.defaultvalue)));
         }
     }
+
     @Override
-    public void onTimelineChanged(Timeline timeline, Object manifest) {}
+    public void onTimelineChanged(Timeline timeline, Object manifest) {
+    }
+
     @Override
-    public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) { }
+    public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
+    }
+
     @Override
-    public void onLoadingChanged(boolean isLoading) {}
+    public void onLoadingChanged(boolean isLoading) {
+    }
+
     @Override
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
         if (playbackState == Player.STATE_READY && playWhenReady) {
@@ -269,20 +282,26 @@ public class ItemDetailStepFragment extends Fragment implements Player.EventList
         }
 
     }
+
     @Override
-    public void onRepeatModeChanged(int repeatMode) {}
+    public void onRepeatModeChanged(int repeatMode) {
+    }
+
     @Override
     public void onPlayerError(ExoPlaybackException error) {
         getActivity().finish();
     }
+
     @Override
     public void onPositionDiscontinuity() {
 
     }
-    @Override
-    public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) { }
 
-    private void onNextFragment(){
+    @Override
+    public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
+    }
+
+    private void onNextFragment() {
         ((Button) rootView.findViewById(R.id.next)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -291,15 +310,15 @@ public class ItemDetailStepFragment extends Fragment implements Player.EventList
         });
     }
 
-    private void executeFragmentManager(){
+    private void executeFragmentManager() {
 
         Bundle arguments = new Bundle();
         Integer index = getIndex();
 
-        arguments.putString(ARG_ITEM_ID,String.valueOf(index));
-        arguments.putBoolean(ARG_ITEM_LAYOUT,mTwoPane);
-        arguments.putInt(ARG_ITEM_AMOUNTOFSTEPS,mAmountOfSteps);
-        arguments.putInt(RECIPE_INDEX,mRecipeIndex);
+        arguments.putString(ARG_ITEM_ID, String.valueOf(index));
+        arguments.putBoolean(ARG_ITEM_LAYOUT, mTwoPane);
+        arguments.putInt(ARG_ITEM_AMOUNTOFSTEPS, mAmountOfSteps);
+        arguments.putInt(RECIPE_INDEX, mRecipeIndex);
 
         ItemDetailStepFragment fragment = new ItemDetailStepFragment();
         fragment.setArguments(arguments);
@@ -308,13 +327,14 @@ public class ItemDetailStepFragment extends Fragment implements Player.EventList
                 .replace(R.id.item_detail_container, fragment)
                 .commit();
     }
+
     @NotNull
     private Integer getIndex() {
         Integer index = null;
-        if(mCurrent <= mAmountOfSteps-1){
+        if (mCurrent <= mAmountOfSteps - 1) {
             index = mCurrent;
             index++;
-        }else{
+        } else {
             index = 0;
         }
         return index;
@@ -337,8 +357,8 @@ public class ItemDetailStepFragment extends Fragment implements Player.EventList
 
     private void executeWorkmanager() {
 
-        WorkManager.getInstance(getActivity()).beginUniqueWork(WORKREQUEST_STEPFRAGMENT+download.getId(),
-                ExistingWorkPolicy.KEEP,download).enqueue().getState().observe(this, new Observer<Operation.State>() {
+        WorkManager.getInstance(getActivity()).beginUniqueWork(WORKREQUEST_STEPFRAGMENT + download.getId(),
+                ExistingWorkPolicy.KEEP, download).enqueue().getState().observe(this, new Observer<Operation.State>() {
             @Override
             public void onChanged(Operation.State state) {
                 Toast.makeText(getActivity(), state.toString(),
@@ -433,19 +453,19 @@ public class ItemDetailStepFragment extends Fragment implements Player.EventList
     private void supplyExoPlayer(String videoURL, String thumbnail) {
 
         String output;
-        if(!videoURL.isEmpty()){
+        if (!videoURL.isEmpty()) {
             output = videoURL;
             MediaSource videoSource = buildMediaSource(output);
             mExoPlayerView.getPlayer().prepare(videoSource);
             mExoPlayerView.getPlayer().setPlayWhenReady(true);
 
-        } else if(!thumbnail.isEmpty()){
+        } else if (!thumbnail.isEmpty()) {
             output = thumbnail;
             MediaSource videoSource = buildMediaSource(output);
             mExoPlayerView.getPlayer().prepare(videoSource);
             mExoPlayerView.getPlayer().setPlayWhenReady(true);
 
-        } else if(thumbnail.isEmpty()&&videoURL.isEmpty()){
+        } else if (thumbnail.isEmpty() && videoURL.isEmpty()) {
             mExoPlayerView.setDefaultArtwork(BitmapFactory.decodeResource
                     (getResources(), R.drawable.question_mark));
         }
@@ -467,20 +487,22 @@ public class ItemDetailStepFragment extends Fragment implements Player.EventList
         Gson gson = new Gson();
         Data data = workInfo.getOutputData();
         String output = data.getString(KEY_TASK_OUTPUT);
-        Type token = new TypeToken<Step>() {}.getType();
+        Type token = new TypeToken<Step>() {
+        }.getType();
         return gson.fromJson(output, token);
     }
 
     private void postThumbnailIntoExoplayer(ArrayList<Recipe> recipes) {
         String thumbnailURL = recipes.get(0).getmSteps().get(0).getThumbnailUrl();
         if (!thumbnailURL.isEmpty()) {
-            Picasso.get().load(thumbnailURL).resize(250,250).into(new Target() {
+            Picasso.get().load(thumbnailURL).resize(250, 250).into(new Target() {
                 @Override
                 public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                     if (bitmap != null) {
                         posterBitmap = bitmap;
                     }
                 }
+
                 @Override
                 public void onBitmapFailed(Exception e, Drawable errorDrawable) {
                     if (e.getCause() != null) {
@@ -490,6 +512,7 @@ public class ItemDetailStepFragment extends Fragment implements Player.EventList
                         Log.d(TAG, "onBitmapFailed: " + e.toString());
                     }
                 }
+
                 @Override
                 public void onPrepareLoad(Drawable placeHolderDrawable) {
                 }
@@ -515,8 +538,9 @@ public class ItemDetailStepFragment extends Fragment implements Player.EventList
             mResumePosition = Math.max(0, mExoPlayerView.getPlayer().getContentPosition());
             mExoPlayerView.getPlayer().release();
         }
-        if (mFullScreenDialog != null){
-            mFullScreenDialog.dismiss();}
+        if (mFullScreenDialog != null) {
+            mFullScreenDialog.dismiss();
+        }
     }
 
     @Nullable

@@ -20,9 +20,9 @@ public class WidgetService extends RemoteViewsService {
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
-        final ExampleWidgetItemFactory itemFactory =  new ExampleWidgetItemFactory(getApplicationContext(), intent);
-                itemFactory.
-        context = getApplicationContext();
+        final ExampleWidgetItemFactory itemFactory = new ExampleWidgetItemFactory(getApplicationContext(), intent);
+        itemFactory.
+                context = getApplicationContext();
         return itemFactory;
     }
 
@@ -39,9 +39,11 @@ public class WidgetService extends RemoteViewsService {
             this.recipeIndex = intent.getIntExtra(AppWidgetManager.EXTRA_CUSTOM_EXTRAS,
                     AppWidgetManager.INVALID_APPWIDGET_ID);
         }
+
         @Override
         public void onCreate() {
         }
+
         @Override
         public void onDataSetChanged() {
             if (hasInternet(context)) {
@@ -56,7 +58,7 @@ public class WidgetService extends RemoteViewsService {
 
         @Override
         public int getCount() {
-            if(recipes==null)recipes = new ArrayList<>(1);
+            if (recipes == null) recipes = new ArrayList<>(1);
             return recipes.size();
         }
 
@@ -65,9 +67,9 @@ public class WidgetService extends RemoteViewsService {
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_item);
 
             String ingredient = recipes.get(position).getIngredient();
-            String measure    = recipes.get(position).getMeasure();
-            String quantity   = String.valueOf(recipes.get(position).getQuantity());
-            String txt = ingredient+" "+measure+" "+quantity;
+            String measure = recipes.get(position).getMeasure();
+            String quantity = String.valueOf(recipes.get(position).getQuantity());
+            String txt = ingredient + " " + measure + " " + quantity;
 
             views.setTextViewText(R.id.example_widget_item_text, txt);
             return views;
@@ -94,7 +96,7 @@ public class WidgetService extends RemoteViewsService {
         }
 
         private void executeRetrofitServiceConnection() {
-            AsyncDownloadWidget asyncDownloadWidget = new AsyncDownloadWidget(context,recipeIndex);
+            AsyncDownloadWidget asyncDownloadWidget = new AsyncDownloadWidget(context, recipeIndex);
             try {
                 recipes = asyncDownloadWidget.execute().get();
             } catch (ExecutionException e) {

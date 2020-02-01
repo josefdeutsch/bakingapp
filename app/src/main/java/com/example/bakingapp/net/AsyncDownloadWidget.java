@@ -25,7 +25,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.bakingapp.constant.Constants.BAKINGRECIPEBASEURL;
 
-/** AsyncTask used to put values from BackgroundThread to MainThread **/
 
 public class AsyncDownloadWidget extends AsyncTask<Void,Void, List<Ingredient>> {
 
@@ -37,7 +36,6 @@ public class AsyncDownloadWidget extends AsyncTask<Void,Void, List<Ingredient>> 
         mRecipeIndex = id;
     }
 
-    /** process data onBackGroundThread : build OkHttpClient, build RetrofitClient, execute ServiceConnection **/
 
     @Override
     protected List<Ingredient> doInBackground(Void... voids) {
@@ -47,7 +45,6 @@ public class AsyncDownloadWidget extends AsyncTask<Void,Void, List<Ingredient>> 
         return executeRetrofitServiceConnection(call);
     }
 
-    /** @return supply an output with an callable input - recipe **/
 
     private List<Ingredient> executeRetrofitServiceConnection(Call<List<Recipe>> call) {
         List<Ingredient> input = null;
@@ -60,23 +57,18 @@ public class AsyncDownloadWidget extends AsyncTask<Void,Void, List<Ingredient>> 
         return output;
     }
 
-    /**@param call access and execute retrofit callable resposenody  **/
-
     private List<Ingredient> supplyInput(Call<List<Recipe>> call, List<Ingredient> input) throws IOException {
         int index = mRecipeIndex;
         input = call.execute().body().get(index).getIngredients();
         return input;
     }
 
-    /** @param retrofit build a service connection derived retrofitService interface **/
 
     private Call<List<Recipe>> buildRetrofitServiceConnection(Retrofit retrofit) {
         RetrofitService service = retrofit.create(RetrofitService.class);
         return service.getPosts();
     }
 
-    /** @param okHttpClient build and add an okHttpClient to retrofit
-     *  @return retrofit **/
     @NotNull
     private Retrofit buildRetrofitClient(OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
@@ -86,7 +78,6 @@ public class AsyncDownloadWidget extends AsyncTask<Void,Void, List<Ingredient>> 
                 .build();
     }
 
-    /** @return a connection timeout 408 request code, if triggered, add interceptor intercept response chain **/
 
     @NotNull
     private OkHttpClient buildHttpClient() {
@@ -102,7 +93,6 @@ public class AsyncDownloadWidget extends AsyncTask<Void,Void, List<Ingredient>> 
                 .build();
     }
 
-    /** @return query response chain if value >= 301 ErrorActivity is called on Mainthread **/
 
     @NotNull
     private Response getResponseCode(Interceptor.Chain chain) throws IOException {

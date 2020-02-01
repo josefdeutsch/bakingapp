@@ -21,6 +21,7 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.Operation;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
+
 import com.example.bakingapp.R;
 import com.example.bakingapp.idlingresource.EspressoIdlingResource;
 import com.example.bakingapp.model.Step;
@@ -29,6 +30,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.jetbrains.annotations.NotNull;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -71,15 +73,15 @@ public class ItemListActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRestart(){
+    public void onRestart() {
         super.onRestart();
 
     }
 
 
-    private void setupToolbar(){
+    private void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        mTitleToolBar = mSharedPreferences.getString(RECIPE_NAME,getString(R.string.defaultvalue));
+        mTitleToolBar = mSharedPreferences.getString(RECIPE_NAME, getString(R.string.defaultvalue));
         setSupportActionBar(toolbar);
         toolbar.setTitle(mTitleToolBar);
     }
@@ -95,7 +97,7 @@ public class ItemListActivity extends AppCompatActivity {
     private void executeWorkRequest() {
 
         WorkManager.getInstance(getApplicationContext()).beginUniqueWork(WORKREQUEST_ITEMLIST + mRecipeIndex,
-                ExistingWorkPolicy.KEEP,mDownload).enqueue().getState().observe(this, new Observer<Operation.State>() {
+                ExistingWorkPolicy.KEEP, mDownload).enqueue().getState().observe(this, new Observer<Operation.State>() {
             @Override
             public void onChanged(Operation.State state) {
                 Toast.makeText(getApplicationContext(), state.toString(),
@@ -126,21 +128,21 @@ public class ItemListActivity extends AppCompatActivity {
     @NotNull
     private Constraints buildConstraints() {
         return new Constraints.Builder()
-                    .setRequiredNetworkType(NetworkType.CONNECTED)
-                    .build();
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build();
     }
 
     private Data buildData() {
-        mRecipeIndex = mSharedPreferences.getInt(RECIPE_INDEX,0);
+        mRecipeIndex = mSharedPreferences.getInt(RECIPE_INDEX, 0);
         return new Data.Builder()
-               .putInt(RECIPE_INDEX, mRecipeIndex)
-               .build();
+                .putInt(RECIPE_INDEX, mRecipeIndex)
+                .build();
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
 
         ItemListActivityAdapter itemListActivityAdapter = new ItemListActivityAdapter
-                (this,this , new ArrayList(1), mRecipeIndex,mTwoPane);
+                (this, this, new ArrayList(1), mRecipeIndex, mTwoPane);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
@@ -171,7 +173,8 @@ public class ItemListActivity extends AppCompatActivity {
         Gson gson = new Gson();
         Data data = workInfo.getOutputData();
         String output = data.getString(KEY_TASK_OUTPUT);
-        Type token = new TypeToken<ArrayList<Step>>() {}.getType();
+        Type token = new TypeToken<ArrayList<Step>>() {
+        }.getType();
         return gson.fromJson(output, token);
     }
 }

@@ -31,7 +31,6 @@ import static com.example.bakingapp.constant.Constants.BAKINGRECIPEBASEURL;
 import static com.example.bakingapp.constant.Constants.KEY_TASK_OUTPUT;
 
 
-/** CallBackWorker design to download data, produce a results and throw errorcallbacks **/
 
 public class CallBackWorkerMain extends androidx.work.ListenableWorker {
 
@@ -44,7 +43,6 @@ public class CallBackWorkerMain extends androidx.work.ListenableWorker {
         mContext = appContext;
     }
 
-    /** process data onBackGroundThread : build OkHttpClient, build RetrofitClient, execute ServiceConnection **/
     @NonNull
     @Override
     public ListenableFuture<Result> startWork() {
@@ -62,7 +60,6 @@ public class CallBackWorkerMain extends androidx.work.ListenableWorker {
         return mFuture;
     }
 
-    /** @return supply an output with an callable input **/
 
     private void executeRetrofitServiceConnection(Call<List<Recipe>> call) {
         List<Recipe> input;
@@ -77,7 +74,6 @@ public class CallBackWorkerMain extends androidx.work.ListenableWorker {
 
     }
 
-    /**@param call access and execute retrofit callable resposenody  **/
 
     private List<Recipe> supplyInput(Call<List<Recipe>> call) throws IOException {
         List<Recipe> input = new ArrayList<Recipe>();
@@ -88,14 +84,12 @@ public class CallBackWorkerMain extends androidx.work.ListenableWorker {
         return input;
     }
 
-    /** @param retrofit build a service connection derived retrofitService interface **/
 
     private Call<List<Recipe>> buildRetrofitServiceConnection(Retrofit retrofit) {
         RetrofitService service = retrofit.create(RetrofitService.class);
         return service.getPosts();
     }
 
-    /** @return Data object with Key passed to Activity/Fragment to be observed **/
 
     private Data buildData(String output) {
         return new Data.Builder()
@@ -103,8 +97,6 @@ public class CallBackWorkerMain extends androidx.work.ListenableWorker {
                 .build();
     }
 
-    /** @param okHttpClient build and add an okHttpClient to retrofit
-     *  @return retrofit **/
 
     @NotNull
     private Retrofit buildRetrofitClient(OkHttpClient okHttpClient) {
@@ -115,7 +107,6 @@ public class CallBackWorkerMain extends androidx.work.ListenableWorker {
                 .build();
     }
 
-    /** @return a connection timeout 408 request code, if triggered, add interceptor intercept response chain **/
 
     @NotNull
     private OkHttpClient buildHttpClient() {
@@ -131,7 +122,6 @@ public class CallBackWorkerMain extends androidx.work.ListenableWorker {
                 .build();
     }
 
-    /** @return query response chain if value >= 301 ErrorActivity is called on Mainthread **/
     @NotNull
     private Response getResponseCode(Interceptor.Chain chain) throws IOException {
         Request request = chain.request();

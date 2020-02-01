@@ -1,7 +1,9 @@
 package com.example.bakingapp.ui;
 
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.bakingapp.R;
 
 public class ErrorActivity extends AppCompatActivity {

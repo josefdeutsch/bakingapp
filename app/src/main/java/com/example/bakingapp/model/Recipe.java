@@ -29,11 +29,11 @@ public class Recipe implements Parcelable {
     @SerializedName("image")
     private String mImage;
 
-    public Recipe(String name){
+    public Recipe(String name) {
         mName = name;
     }
 
-    public Recipe(int recipeId, String name){
+    public Recipe(int recipeId, String name) {
         mId = recipeId;
         mName = name;
     }

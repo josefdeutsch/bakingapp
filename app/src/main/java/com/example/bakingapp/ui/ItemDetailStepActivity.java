@@ -39,10 +39,10 @@ public class ItemDetailStepActivity extends AppCompatActivity {
             Bundle arguments = new Bundle();
             arguments.putString(ARG_ITEM_ID,
                     getIntent().getStringExtra(ARG_ITEM_ID));
-            arguments.putBoolean(ARG_ITEM_LAYOUT,false);
+            arguments.putBoolean(ARG_ITEM_LAYOUT, false);
             arguments.putInt(ARG_ITEM_AMOUNTOFSTEPS,
-                    getIntent().getIntExtra(ARG_ITEM_AMOUNTOFSTEPS,0));
-            arguments.putInt(RECIPE_INDEX,mRecipeIndex);
+                    getIntent().getIntExtra(ARG_ITEM_AMOUNTOFSTEPS, 0));
+            arguments.putInt(RECIPE_INDEX, mRecipeIndex);
             ItemDetailStepFragment fragment = new ItemDetailStepFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
@@ -59,7 +59,7 @@ public class ItemDetailStepActivity extends AppCompatActivity {
     }
 
     private int getRecipeIndex() {
-        return getIntent().getIntExtra(RECIPE_INDEX,0);
+        return getIntent().getIntExtra(RECIPE_INDEX, 0);
     }
 
     @Override

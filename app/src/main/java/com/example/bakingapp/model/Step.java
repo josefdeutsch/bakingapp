@@ -1,4 +1,5 @@
 package com.example.bakingapp.model;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -35,9 +36,9 @@ public class Step implements Parcelable {
         mThumbnailUrl = thumbnailUrl;
     }
 
-    public Step(int id, String shortDescription){
-        mShortDescription=shortDescription;
-        mId=id;
+    public Step(int id, String shortDescription) {
+        mShortDescription = shortDescription;
+        mId = id;
     }
 
     private Step(Parcel in) {

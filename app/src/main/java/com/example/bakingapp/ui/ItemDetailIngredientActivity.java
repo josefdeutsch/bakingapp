@@ -23,7 +23,7 @@ public class ItemDetailIngredientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_item_detail_ingredient);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
-        mAdapterPosition = getIntent().getIntExtra(RECIPE_INDEX,0);
+        mAdapterPosition = getIntent().getIntExtra(RECIPE_INDEX, 0);
 
         setupActionBar();
         setupItemDetailFragment(savedInstanceState);
@@ -32,7 +32,7 @@ public class ItemDetailIngredientActivity extends AppCompatActivity {
     private void setupItemDetailFragment(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             Bundle arguments = new Bundle();
-            arguments.putInt(RECIPE_INDEX,mAdapterPosition);
+            arguments.putInt(RECIPE_INDEX, mAdapterPosition);
             ItemDetailIngredientFragment fragment = new ItemDetailIngredientFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()

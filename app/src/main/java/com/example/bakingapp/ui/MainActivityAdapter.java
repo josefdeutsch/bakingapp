@@ -31,17 +31,17 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
     private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Recipe item = (Recipe)view.getTag();
+            Recipe item = (Recipe) view.getTag();
             Context context = view.getContext();
-            Intent intent = new Intent(context,ItemListActivity.class);
+            Intent intent = new Intent(context, ItemListActivity.class);
             supplySharedPreferences(item, context);
             context.startActivity(intent);
         }
     };
 
     private void supplySharedPreferences(Recipe item, Context context) {
-        supplyRecipeIndexSharedPreferences(context,item.getId()-1);
-        supplyTitleNameSharedPreferences(context,item.getName());
+        supplyRecipeIndexSharedPreferences(context, item.getId() - 1);
+        supplyTitleNameSharedPreferences(context, item.getName());
     }
 
     MainActivityAdapter(ArrayList<Recipe> items) {
@@ -91,7 +91,7 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
         editor.apply();
     }
 
-    private void supplyTitleNameSharedPreferences(Context view,String name) {
+    private void supplyTitleNameSharedPreferences(Context view, String name) {
         SharedPreferences.Editor editor = view.getSharedPreferences(SHAREDPREFERENCES_EDITOR, MODE_PRIVATE).edit();
         editor.remove(RECIPE_NAME);
         editor.putString(RECIPE_NAME, name);

@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.jetbrains.annotations.NotNull;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void executeWorkRequest() {
         WorkManager.getInstance(getApplicationContext()).beginUniqueWork(WORKREQUEST_MAIN,
-                ExistingWorkPolicy.KEEP,mDownload).enqueue().getState().observe(this, new Observer<Operation.State>() {
+                ExistingWorkPolicy.KEEP, mDownload).enqueue().getState().observe(this, new Observer<Operation.State>() {
             @Override
             public void onChanged(Operation.State state) {
                 Toast.makeText(getApplicationContext(), state.toString(),
@@ -103,21 +104,21 @@ public class MainActivity extends AppCompatActivity {
     @NotNull
     private OneTimeWorkRequest buildOneTimeWorkRequest(Constraints constraints) {
         return new OneTimeWorkRequest.Builder(CallBackWorkerMain.class)
-                    .setConstraints(constraints)
-                    .build();
+                .setConstraints(constraints)
+                .build();
     }
 
     @NotNull
     private Constraints buildConstraints() {
         return new Constraints.Builder()
-                    .setRequiredNetworkType(NetworkType.CONNECTED)
-                    .build();
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build();
     }
 
     private void getLayoutDecision() {
         if (findViewById(R.id.ingredient_textView) != null) {
             mLayoutManager = new GridAutofitLayoutManager(this, 600);
-        }else{
+        } else {
             mLayoutManager = new LinearLayoutManager(this);
         }
     }
@@ -132,8 +133,9 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new Gson();
         Data data = workInfo.getOutputData();
         String output = data.getString(KEY_TASK_OUTPUT);
-        Type token = new TypeToken<ArrayList<Recipe>>() {}.getType();
-        ArrayList<Recipe> recipes= gson.fromJson(output, token);
+        Type token = new TypeToken<ArrayList<Recipe>>() {
+        }.getType();
+        ArrayList<Recipe> recipes = gson.fromJson(output, token);
         return recipes;
     }
 

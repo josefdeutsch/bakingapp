@@ -53,7 +53,7 @@ public class ItemListActivityAdapter extends RecyclerView.Adapter<RecyclerView.V
             Bundle arguments = new Bundle();
             ItemDetailIngredientFragment fragment = new ItemDetailIngredientFragment();
             fragment.setArguments(arguments);
-            arguments.putInt(RECIPE_INDEX,mAdapterposition);
+            arguments.putInt(RECIPE_INDEX, mAdapterposition);
             mParentActivity.getSupportFragmentManager().beginTransaction()
                     .replace(R.id.item_detail_container, fragment)
                     .commit();
@@ -91,7 +91,7 @@ public class ItemListActivityAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-     void setRecipes(List<Step> arrayList) {
+    void setRecipes(List<Step> arrayList) {
         this.mValues = arrayList;
         notifyDataSetChanged();
     }
@@ -101,7 +101,7 @@ public class ItemListActivityAdapter extends RecyclerView.Adapter<RecyclerView.V
         return mValues.size();
     }
 
-    class IngredientViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class IngredientViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private View mView;
         private TextView txtName;
         private ImageView imageView;
@@ -127,14 +127,14 @@ public class ItemListActivityAdapter extends RecyclerView.Adapter<RecyclerView.V
                 Bundle arguments = new Bundle();
                 ItemDetailIngredientFragment fragment = new ItemDetailIngredientFragment();
                 fragment.setArguments(arguments);
-                arguments.putInt(RECIPE_INDEX,mAdapterposition);
+                arguments.putInt(RECIPE_INDEX, mAdapterposition);
                 mParentActivity.getSupportFragmentManager().beginTransaction()
                         .replace(R.id.item_detail_container, fragment)
                         .commit();
             } else {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, ItemDetailIngredientActivity.class);
-                intent.putExtra(RECIPE_INDEX,mAdapterposition);
+                intent.putExtra(RECIPE_INDEX, mAdapterposition);
                 context.startActivity(intent);
             }
         }
@@ -166,9 +166,9 @@ public class ItemListActivityAdapter extends RecyclerView.Adapter<RecyclerView.V
             if (mTwoPane) {
                 Bundle arguments = new Bundle();
                 arguments.putString(ARG_ITEM_ID, String.valueOf(item.getStepId()));
-                arguments.putBoolean(ARG_ITEM_LAYOUT,true);
-                arguments.putInt(ARG_ITEM_AMOUNTOFSTEPS,mValues.size());
-                arguments.putInt(RECIPE_INDEX,mAdapterposition);
+                arguments.putBoolean(ARG_ITEM_LAYOUT, true);
+                arguments.putInt(ARG_ITEM_AMOUNTOFSTEPS, mValues.size());
+                arguments.putInt(RECIPE_INDEX, mAdapterposition);
                 ItemDetailStepFragment fragment = new ItemDetailStepFragment();
                 fragment.setArguments(arguments);
                 mParentActivity.getSupportFragmentManager().beginTransaction()
@@ -177,9 +177,9 @@ public class ItemListActivityAdapter extends RecyclerView.Adapter<RecyclerView.V
             } else {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, ItemDetailStepActivity.class);
-                intent.putExtra(RECIPE_INDEX,mAdapterposition);
+                intent.putExtra(RECIPE_INDEX, mAdapterposition);
                 intent.putExtra(ARG_ITEM_ID, String.valueOf(item.getStepId()));
-                intent.putExtra(ARG_ITEM_AMOUNTOFSTEPS,mValues.size());
+                intent.putExtra(ARG_ITEM_AMOUNTOFSTEPS, mValues.size());
                 context.startActivity(intent);
             }
         }

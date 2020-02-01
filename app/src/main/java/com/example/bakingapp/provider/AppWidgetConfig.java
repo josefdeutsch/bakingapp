@@ -11,11 +11,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RemoteViews;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.bakingapp.R;
 import com.example.bakingapp.ui.ItemListActivity;
 import com.example.bakingapp.ui.MainActivity;
+
+import org.jetbrains.annotations.NotNull;
 
 import static com.example.bakingapp.constant.Constants.KEY_BUTTON_TEXT;
 import static com.example.bakingapp.constant.Constants.RECIPE_INDEX;
@@ -56,46 +60,76 @@ public class AppWidgetConfig extends AppCompatActivity {
     }
 
     private void onConfiguration() {
-        if(isRepositoryEmpty()){
+        if (isRepositoryEmpty()) {
             alertDialog();
-        }else {
+        } else {
             initAppWidgetManager();
         }
     }
+
     private boolean isRepositoryEmpty() {
         SharedPreferences prefs = getApplicationContext().getSharedPreferences(SHAREDPREFERENCES_EDITOR, Context.MODE_PRIVATE);
-        if(!prefs.contains(RECIPE_INDEX))return true;
+        if (!prefs.contains(RECIPE_INDEX)) return true;
         return false;
     }
+
     private void initAppWidgetManager() {
 
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
-        Intent intent = new Intent(this, ItemListActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        PendingIntent pendingIntent = getPendingIntent();
 
         String buttonText = editTextButton.getText().toString();
 
-        Intent serviceIntent = new Intent(this, WidgetService.class);
-        serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
+        Intent serviceIntent = getServiceIntent();
 
+        RemoteViews views = getRemoteViews(pendingIntent, buttonText, serviceIntent);
+
+        appWidgetManager.updateAppWidget(appWidgetId, views);
+
+        supplyKeyButtonSharedPreferences(buttonText);
+
+        Intent resultValue = getResult();
+
+        setResult(RESULT_OK, resultValue);
+        finish();
+    }
+
+    @NotNull
+    private Intent getResult() {
+        Intent resultValue = new Intent();
+        resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+        return resultValue;
+    }
+
+    private void supplyKeyButtonSharedPreferences(String buttonText) {
+        SharedPreferences prefs = getSharedPreferences(SHAREDPREFERENCES_EDITOR, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(KEY_BUTTON_TEXT + appWidgetId, buttonText);
+        editor.apply();
+    }
+
+    @NotNull
+    private RemoteViews getRemoteViews(PendingIntent pendingIntent, String buttonText, Intent serviceIntent) {
         RemoteViews views = new RemoteViews(this.getPackageName(), R.layout.widget);
         views.setOnClickPendingIntent(R.id.example_widget_button, pendingIntent);
         views.setCharSequence(R.id.example_widget_button, "setText", buttonText);
         views.setRemoteAdapter(R.id.example_widget_stack_view, serviceIntent);
         views.setEmptyView(R.id.example_widget_stack_view, R.id.example_widget_empty_view);
+        return views;
+    }
 
-        appWidgetManager.updateAppWidget(appWidgetId, views);
+    private PendingIntent getPendingIntent() {
+        Intent intent = new Intent(this, ItemListActivity.class);
+        return PendingIntent.getActivity(this, 0, intent, 0);
+    }
 
-        SharedPreferences prefs = getSharedPreferences(SHAREDPREFERENCES_EDITOR, MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(KEY_BUTTON_TEXT + appWidgetId, buttonText);
-        editor.apply();
-
-        Intent resultValue = new Intent();
-        resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        setResult(RESULT_OK, resultValue);
-        finish();
+    @NotNull
+    private Intent getServiceIntent() {
+        Intent serviceIntent = new Intent(this, WidgetService.class);
+        serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+        serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
+        return serviceIntent;
     }
 
     private void alertDialog() {
@@ -111,6 +145,7 @@ public class AppWidgetConfig extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
     @Override
     protected void onStart() {
         super.onStart();
