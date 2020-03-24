@@ -18,4 +18,4 @@ An Application has [jetpack](https://developer.android.com/jetpack), shows a [tw
 
 **Start contributing:** Make sure you read [SETUP.md](https://github.com/owncloud/android/blob/master/SETUP.md) when you start working on this project. Basically: Fork this repository and contribute back using pull requests to the master branch.
 
-**License:** [GPLv2](https://github.com/josefdeutsch/udacityappmaterial/blob/master/LICENSE.txt)
+**License:** [GPLv2](https://github.com/josefdeutsch/udacitybakingapp/blob/master/LICENSE.txt)
