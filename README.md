@@ -65,7 +65,6 @@ made by [Roundicons](https://www.flaticon.com/authors/roundicons) from
 - [Timber](https://github.com/JakeWharton/timber)
 - [OkHttp](http://square.github.io/okhttp/)
 
-![baking_tablet](https://user-images.githubusercontent.com/33213229/45926062-a1a8f800-bf59-11e8-9c02-bb2178d2fec1.png)
 
 ## License
 Apache, see the [LICENSE](LICENSE) file.
