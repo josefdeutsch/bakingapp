@@ -59,6 +59,7 @@ made by [Roundicons](https://www.flaticon.com/authors/roundicons) from
     * [Room](https://developer.android.com/topic/libraries/architecture/room)
     * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
     * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
+    * [Workermanager](https://developer.android.com/topic/libraries/architecture/workermanager)
 - [Retrofit](http://square.github.io/retrofit/) for REST api communication
 - [ExoPlayer](https://github.com/google/ExoPlayer) to play media locally and over the Internet
 - [Picasso](http://square.github.io/picasso/) for image loading
