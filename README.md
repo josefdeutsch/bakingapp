@@ -19,7 +19,6 @@ In this project you will:
 
 ## Libraries
 - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/) 
-    * [Paging](https://developer.android.com/topic/libraries/architecture/paging/) 
     * [Room](https://developer.android.com/topic/libraries/architecture/room)
     * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
     * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
