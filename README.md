@@ -25,6 +25,9 @@ In this project you will:
     * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
     * [Workermanager](https://developer.android.com/topic/libraries/architecture/workermanager)
     * [Espresso](https://developer.android.com/topic/libraries/architecture/espresso)
+    * [ActivityScenario](https://developer.android.com/topic/libraries/architecture/activity)
+    * [FragmentScenario](https://developer.android.com/topic/libraries/architecture/fragment)
+     
 - [Retrofit](http://square.github.io/retrofit/) for REST api communication
 - [Picasso](http://square.github.io/picasso/) for image loading
 
